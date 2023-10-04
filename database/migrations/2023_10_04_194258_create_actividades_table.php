@@ -12,15 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('actividades', function (Blueprint $table) {
-            Schema::create('actividades', function (Blueprint $table) {
+            
                 $table->id(); // Equivalente a 'actividad_id serial PRIMARY KEY' en PostgreSQL
                 $table->string('fecha_actividad');
                 $table->string('descripcion_actividad');
                 $table->unsignedBigInteger('tarea_id');
-                $table->foreign('tarea_id')->references('id')->on('tareas');
+                $table->foreign('id')->references('id')->on('tareas');
                 $table->timestamps();
             });
-        });
+    
     }
 
     /**

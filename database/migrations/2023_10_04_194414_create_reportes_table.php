@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('num_total_tareas_completadas');
             $table->string('num_tareas_pendientes');
             $table->unsignedBigInteger('usuario_id');
-            $table->foreign('usuario_id')->references('id')->on('usuarios');
+            $table->foreign('id')->references('id')->on('users');
             $table->timestamps();
         });
     }
