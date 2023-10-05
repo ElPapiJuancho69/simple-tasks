@@ -20,4 +20,11 @@
         </div>
     </div>
 </div>
+<div class="container text-center">
+    <div class="button-container">
+        <a href="{{ route('actividades.index') }}" class="btn btn-primary">Ver Actividades</a>
+        <a href="{{ route('tareas.index') }}" class="btn btn-primary">Ver Tareas</a>
+        <a href="{{ route('reportes.index') }}" class="btn btn-primary">Ver Reportes</a>
+    </div>
+</div>
 @endsection
