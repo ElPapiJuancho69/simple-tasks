@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class tareas extends Model
+class Tareas extends Model
 {
     use HasFactory;
+
+    protected $table = 'tareas'; // Especifica el nombre de la tabla en la base de datos
 }

@@ -9,10 +9,10 @@ class ActividadesController extends Controller
 {
     public function index()
     {
-        $actividaddes=Actividades::all();
+        $actividades = Actividades::all(); // Cambié $actividaddes a $actividades
         return view('ActividadesIndex', compact('actividades'));
     }
-
+    
     public function create()
     {
         return view('actividadescreate');

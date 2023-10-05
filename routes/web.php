@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ActividadesController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ReportesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,3 +22,6 @@ Route::resource('actividades',ActividadesController::class);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('actividades', [ActividadesController::class, 'index'])->name('actividadesindex');
+Route::get('/reportes', [ReportesController::class, 'index'])->name('reportes.index');
+Route::get('/tareas', [TareasController::class, 'index'])->name('tareas.index');
