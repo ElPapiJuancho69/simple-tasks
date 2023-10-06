@@ -9,11 +9,12 @@ class TareasController extends Controller
 {
     public function index()
     {
-        $tareas = Tareas::all();
+        $tareas = Tareas::all(); // Obtener todos los registros de tareas
         return view('tareasindex', compact('tareas'));
     }
     
     
+
     public function create()
     {
         return view('tareascreate');

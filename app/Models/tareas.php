@@ -8,6 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class Tareas extends Model
 {
     use HasFactory;
-
-    protected $table = 'tareas'; // Especifica el nombre de la tabla en la base de datos
 }
