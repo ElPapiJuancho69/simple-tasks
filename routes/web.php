@@ -20,13 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('actividades/create',[ActividadesController::class, 'create']);
-Route::resource('actividades',ActividadesController::class);
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('actividades', [ActividadesController::class, 'index'])->name('actividadesindex');
-Route::get('/reportes', [ReportesController::class, 'index'])->name('reportes.index');
-Route::get('/tareas', [TareasController::class, 'index'])->name('tareasindex');
+Route::resource('/actividades', ActividadesController::class);
+Route::resource('/reportes', ReportesController::class);
+Route::resource('/tareas', TareasController::class);
 Route::get('/tareas/create', [TareasController::class, 'create']);
-Route::post('/tareas', [TareasController::class, 'store'])->name('tareas.store');
-Route::get('/reportes/create', [ReportesController::class, 'create'])->name('reportes.index');
+Route::get('/reportes/create', [ReportesController::class, 'create']);
