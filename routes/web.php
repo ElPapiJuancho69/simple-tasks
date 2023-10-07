@@ -29,3 +29,4 @@ Route::get('/reportes', [ReportesController::class, 'index'])->name('reportes.in
 Route::get('/tareas', [TareasController::class, 'index'])->name('tareasindex');
 Route::get('/tareas/create', [TareasController::class, 'create']);
 Route::post('/tareas', [TareasController::class, 'store'])->name('tareas.store');
+Route::get('/reportes/create', [ReportesController::class, 'create'])->name('reportes.index');

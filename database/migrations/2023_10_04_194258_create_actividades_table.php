@@ -17,7 +17,7 @@ return new class extends Migration
                 $table->string('fecha_actividad');
                 $table->string('descripcion_actividad');
                 $table->unsignedBigInteger('tarea_id');
-                $table->foreign('id')->references('id')->on('tareas');
+                $table->foreign('tarea_id')->references('id')->on('tareas');
                 $table->timestamps();
             });
     

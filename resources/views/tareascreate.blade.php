@@ -27,11 +27,7 @@
     <div>
         <label for="usuario_id">Usuario:</label>
         <!-- Aquí puedes agregar un menú desplegable para seleccionar el usuario -->
-        <select name="usuario_id" id="usuario_id">
-            <!-- Recuerda cargar dinámicamente los usuarios disponibles desde tu base de datos -->
-            <option value="1">Usuario 1</option>
-            <option value="2">Usuario 2</option>
-            <!-- Agrega más opciones según tus usuarios -->
+        <input name="usuario_id" id="usuario_id">
         </select>
     </div>
 

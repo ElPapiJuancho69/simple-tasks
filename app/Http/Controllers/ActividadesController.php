@@ -20,22 +20,14 @@ class ActividadesController extends Controller
 
     public function store(Request $request)
     {
-        // Valida los datos del formulario
-        $request->validate([
-            'fecha_actividad' => 'required',
-            'descripcion_actividad' => 'required',
-            'tarea_id' => 'required', // Asegúrate de que este campo esté presente en el formulario
-        ]);
+        $actividad = new Actividades();
+            
+        $actividad->fecha_actividad = $request->input('fecha_actividad');
+        $actividad->descripcion_actividad = $request->input('descripcion_actividad');
+        $actividad->tarea_id = $request->input('tarea_id');
+        
     
-        // Crea una nueva instancia de Actividades con los datos del formulario
-        Actividades::create([
-            'fecha_actividad' => $request->input('fecha_actividad'),
-            'descripcion_actividad' => $request->input('descripcion_actividad'),
-            'tarea_id' => $request->input('tarea_id'),
-        ]);
-    
-        // Redirecciona a la página de inicio de actividades o a donde desees
-        return redirect()->route('actividades.index')->with('success', 'Actividad creada exitosamente.');
+        return view('actividadesindex');
     }
     
 

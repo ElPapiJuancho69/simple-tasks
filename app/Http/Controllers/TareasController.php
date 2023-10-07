@@ -21,22 +21,17 @@ class TareasController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'titulo' => 'required',
-            'descripcion' => 'required',
-        ]);
-    
+    {    
         $tarea = new Tareas();
         $tarea->titulo = $request->input('titulo');
         $tarea->descripcion = $request->input('descripcion');
         $tarea->fecha_creacion = now(); // Establecer la fecha actual
-        $tarea->estado = 'pendiente'; // Puedes establecer un valor predeterminado para el estado
+        $tarea->estado = $request->input('estado'); // Puedes establecer un valor predeterminado para el estado
         $tarea->usuario_id = $request->input('usuario_id'); // Asegúrate de tener el campo usuario_id en el formulario.
     
         $tarea->save();
     
-        return redirect()->route('tareas.index')->with('success', 'Tarea creada exitosamente.');
+        return view('tareasindex');
     }
     
     
