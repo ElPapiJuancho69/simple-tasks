@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Tareas extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['titulo', 'descripcion'];
+    public function usuario()
+{
+    return $this->belongsTo(User::class, 'usuario_id');
+}
+
 }

@@ -27,3 +27,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('actividades', [ActividadesController::class, 'index'])->name('actividadesindex');
 Route::get('/reportes', [ReportesController::class, 'index'])->name('reportes.index');
 Route::get('/tareas', [TareasController::class, 'index'])->name('tareasindex');
+Route::get('/tareas/create', [TareasController::class, 'create']);
+Route::post('/tareas', [TareasController::class, 'store'])->name('tareas.store');
