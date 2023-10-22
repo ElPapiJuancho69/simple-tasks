@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Actividades;
 use Illuminate\Http\Request;
+use App\Models\tareas;
 
 class ActividadesController extends Controller
 {
@@ -25,29 +26,72 @@ class ActividadesController extends Controller
         $actividad->fecha_actividad = $request->input('fecha_actividad');
         $actividad->descripcion_actividad = $request->input('descripcion_actividad');
         $actividad->tarea_id = $request->input('tarea_id');
+
+        $actividad->save();
         
     
-        return view('actividadesindex');
+        return redirect()->route('actividades.index');
     }
     
-
     public function show($id)
     {
-        // Lógica para mostrar un registro específico del modelo en la vista
+        $actividad = actividades::find($id);
+
+        if ($actividad) {
+            return view('actividadesshow', compact('actividad'));
+        } else {
+            return redirect()->route('actividades.index')->with('error', 'actividad no encontrada.');
+        }        
     }
 
     public function edit($id)
     {
-        // Lógica para mostrar el formulario de edición
-    }
+        // Aquí debes buscar el cliente por su ID, suponiendo que tienes un modelo llamado "patient"
+        $actividad = actividades::find($id);
+    
+        // Luego, puedes retornar la vista de edición junto con el cliente encontrado
+        return view('actividadesedit', compact('actividades'));    }
 
     public function update(Request $request, $id)
     {
-        // Lógica para actualizar un registro específico en la base de datos
+       // Validación de datos
+       $this->validate($request, [
+        'fecha_actividad' => 'required',
+        'descripcion_actividad' => 'required',
+        'tarea_id' => 'required',
+    ]);
+
+    // Obtener el cliente a actualizar
+    $actividad = actividades::find($id);
+
+    if (!$actividad) {
+        // Manejar el caso en que el cliente no se encuentra
+        return redirect()->route('tareas.index')->with('error', 'Paciente no encontrado');
     }
+
+    // Actualizar los datos del cliente
+    $actividad->fecha_creacion = $request->input('titulo');
+    $actividad->descripcion_actividad = $request->input('descripcion');
+    $actividad->tarea_id = $request->input('fecha_creacion');
+
+    $actividad->save();
+
+    return redirect()->route('actividades.show', $actividad->id)->with('success', 'tarea actualizada con éxito');    }
 
     public function destroy($id)
     {
         // Lógica para eliminar un registro específico de la base de datos
+    }
+    public function showTarea($id)
+    {
+        $actividad = actividades::find($id);
+
+        if (!$actividad) {
+            return redirect()->route('actividades.index')->with('error', 'actividad no encontrado.');
+        }
+
+        $tareas = tareas::where('tarea_id', $id)->get();
+
+        return view('actividadesindex', compact('tareas', 'actividad'));
     }
 }

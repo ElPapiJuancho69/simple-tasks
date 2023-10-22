@@ -14,7 +14,7 @@
         @foreach($actividades as $actividad)
             <tr>
                 <td>{{ $actividad->id }}</td>
-                <td>{{ $actividad->descripcion_actividad }}</td>
+                <td>{{ $actividad->tareas->descripcion }}</td>
                 <td>{{ $actividad->fecha_actividad }}</td>
             </tr>
         @endforeach

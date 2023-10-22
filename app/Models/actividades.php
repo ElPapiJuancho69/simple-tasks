@@ -1,19 +1,16 @@
 <?php
 
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\tareas;
 class Actividades extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['fecha_actividad', 'descripcion_actividad', 'tarea_id'];
-
     // Definir la relación con la tabla Tarea
-    public function tarea()
+    public function tareas()
     {
-        return $this->belongsTo(Tarea::class, 'tarea_id');
+        return $this->belongsTo(tareas::class, 'tarea_id');
     }
 }
