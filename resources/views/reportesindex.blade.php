@@ -3,10 +3,12 @@
 @section('title', 'Lista de Reportes')
 
 @section('content')
-<nav class="navbar bg-body-tertiary">
-    <div class="container-fluid">
-        <h1 class="display-10">Listado de Reportes</h1>
-
+<div class="container mt-4 text-center">
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+            <h1 class="display-10">Listado de Reportes</h1>
+        </div>
+    </nav>
     <table class="table">
         <thead>
             <tr>
@@ -26,15 +28,13 @@
                     <td>{{ $reporte->num_total_tareas_completadas }}</td>
                     <td>{{ $reporte->num_tareas_pendientes }}</td>
                     <td><a href="{{ route('reportes.show', $reporte->id) }}" class="btn btn-primary">Ver Detalles</a></td>
-
                 </tr>
-
             @endforeach
         </tbody>
-
     </table>
-    <form class="d-flex" role="search">  
-        <a href="/reportes/create" class="btn btn-outline-primary">Agregar reporte</a>  
-    </form>
+    <div class="text-center mt-4">
+        <a href="/reportes/create" class="btn btn-outline-primary mr-3">Agregar Reporte</a>
+        <a href="/home" class="btn btn-outline-primary">Inicio</a>
+    </div>
+</div>
 @endsection
-    
