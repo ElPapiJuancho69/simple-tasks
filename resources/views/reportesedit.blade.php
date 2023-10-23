@@ -3,10 +3,10 @@
 @section('content')
 <h1 class="display-6">Editar Reporte</h1>
 
-<form method="POST" class="row g-3 needs-validation" action="{{ route('reportes.update', $reporte->id) }}">
-    @csrf
+<form method="POST" class="row g-3 needs-validation" action="{{ route('reportes.update', $reporte->id) }}" enctype="multipart/form-data">
+    
     @method('PUT') {{-- Usa el método PUT para actualización --}}
-
+    @csrf
     <div class="col-md-6">
         <label  for="fecha_generacion" class="form-label">Fecha Generacion</label>
         <input type="date" name="fecha_generacion"  class="form-control" value="{{$reporte->fecha_generacion}}" required>

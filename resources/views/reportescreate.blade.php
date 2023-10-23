@@ -3,7 +3,13 @@
 @section('content')
     <div class="container">
         <h1 class="display-6">Crear Reporte</h1>
-
+        <script>
+            @if(session('success'))
+                alert("{{ session('success') }}");
+            @elseif(session('error'))
+                alert("{{ session('error') }}");
+            @endif
+        </script>
         <form method="POST" class="row g-3 needs-validation" action="/reportes">
             @csrf
 
@@ -34,6 +40,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Crear Reporte</button>
+            <a href="/reportes" class="btn btn-outline-primary">Inicio</a>
         </form>
     </div>
 @endsection

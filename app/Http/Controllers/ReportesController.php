@@ -21,7 +21,7 @@ class ReportesController extends Controller
     }
 
     public function store(Request $request)
-    {    
+    {    try{
         $reporte = new reportes();
         $reporte->fecha_generacion = now();
         $reporte->num_total_tareas = $request->input('num_total_tareas');
@@ -32,6 +32,10 @@ class ReportesController extends Controller
         $reporte->save();
     
         return redirect()->route('reportes.index');
+    } catch (\Illuminate\Database\QueryException $e) {
+        // Manejar la excepción de la base de datos (error de llave foránea)
+        return redirect("/reportes/create")->with('error', 'No existe el usuario');
+    }
     }
     
     
@@ -50,7 +54,7 @@ class ReportesController extends Controller
     public function edit($id)
     {
         // Aquí debes buscar el cliente por su ID, suponiendo que tienes un modelo llamado "patient"
-        $reporte = reportes::find($id);
+     $reporte = reportes::find($id);
     
         // Luego, puedes retornar la vista de edición junto con el cliente encontrado
         return view('reportesedit', compact('reporte'));    }

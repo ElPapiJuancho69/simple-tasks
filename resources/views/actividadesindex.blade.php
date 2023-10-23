@@ -20,12 +20,13 @@
                 </tr>
             @endforeach
         </tbody>
+        <tr>
+        </tr>
     </table>
     <div class="text-center mb-4">
         <a href="/actividades/create" class="btn btn-outline-primary mr-3">Agregar Actividad</a>
         <a href="/tareas" class="btn btn-outline-primary">Ver Tareas</a>
         <a href="/home" class="btn btn-outline-primary">Inicio</a>
-
     </div>
 </div>
 @endsection

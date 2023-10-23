@@ -21,6 +21,7 @@ class ActividadesController extends Controller
 
     public function store(Request $request)
     {
+        try{
         $actividad = new Actividades();
             
         $actividad->fecha_actividad = $request->input('fecha_actividad');
@@ -31,6 +32,12 @@ class ActividadesController extends Controller
         
     
         return redirect()->route('actividades.index');
+        
+    } catch (\Illuminate\Database\QueryException $e) {
+        // Manejar la excepción de la base de datos (error de llave foránea)
+        return redirect("/actividades/create")->with('error', 'La tarea no existe');
+    }
+
     }
     
     public function show($id)
@@ -80,9 +87,23 @@ class ActividadesController extends Controller
 
     public function destroy($id)
     {
-        // Lógica para eliminar un registro específico de la base de datos
+        {
+            $actividad = actividades::find($id);
+    
+            if ($actividad) {
+                try {
+                    $actividad->delete();
+                    return redirect("/actividades")->with('success', 'tarea eliminada con éxito');
+                } catch (\Illuminate\Database\QueryException $e) {
+                    // Manejar la excepción de la base de datos (error de llave foránea)
+                    return redirect("/actividades")->with('error', 'No se puede eliminar la tarea. Está siendo utilizada en otra parte del sistema.');
+                }
+            } else {
+                return redirect("/actividades")->with('error', 'tarea no encontrada');
+            }
+        }
     }
-    public function showTarea($id)
+    public function showTareas($id)
     {
         $actividad = actividades::find($id);
 

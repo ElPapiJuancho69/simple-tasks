@@ -2,7 +2,13 @@
 @section('title', 'Tareas Edit')
 @section('content')
 <h1 class="display-6">Crear una Tarea</h1>
-
+<script>
+    @if(session('success'))
+        alert("{{ session('success') }}");
+    @elseif(session('error'))
+        alert("{{ session('error') }}");
+    @endif
+</script>
 <form method="POST" class="row g-3 needs-validation" action="{{ route('tareas.store') }}">
     @csrf
 
@@ -37,5 +43,6 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Crear Tarea</button>
+    <a href="/tareas" class="btn btn-outline-primary">Inicio</a>
 </form>
 @endsection

@@ -30,8 +30,6 @@
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 
                         <!-- Botón para editar el cliente -->
-                        <a href="{{ route('reportes.edit', $reporte->id) }}" class="btn btn-success" role="button">Editar</a>
-
                         <!-- Botón de eliminación -->
                         <form method="POST" action="{{ route('reportes.destroy', $reporte->id) }}">
                             @csrf

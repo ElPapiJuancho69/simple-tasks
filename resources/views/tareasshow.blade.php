@@ -5,7 +5,7 @@
     <script>
         function confirmDelete(id) {
             if (confirm("¿Estás seguro de que quieres eliminar esta tarea?")) {
-                // Si el usuario confirma, redirigir al controlador para eliminar el paciente
+                // Si el usuario confirma, redirigir al controlador para eliminar la tarea
                 window.location.href = '/tareas/delete/' + id;
             }
         }

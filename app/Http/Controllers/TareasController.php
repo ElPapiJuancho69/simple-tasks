@@ -21,7 +21,7 @@ class TareasController extends Controller
     }
 
     public function store(Request $request)
-    {    
+    {    try{
         $tarea = new tareas();
         $tarea->titulo = $request->input('titulo');
         $tarea->descripcion = $request->input('descripcion');
@@ -30,6 +30,10 @@ class TareasController extends Controller
         $tarea->usuario_id = $request->input('usuario_id'); // Asegúrate de tener el campo usuario_id en el formulario.
         $tarea->save();
         return redirect()->route('tareas.index');
+    } catch (\Illuminate\Database\QueryException $e) {
+        // Manejar la excepción de la base de datos (error de llave foránea)
+        return redirect("/tareas/create")->with('error', 'No se existe el usuario');
+    }
     }
     
     
