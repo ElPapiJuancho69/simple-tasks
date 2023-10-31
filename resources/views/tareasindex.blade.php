@@ -15,6 +15,7 @@
                 <th>Descripción</th>
                 <th>Fecha de Creación</th>
                 <th>Estado</th>
+                <th>Acciones</th> <!-- Nueva columna para acciones -->
             </tr>
         </thead>
         <tbody>
@@ -25,16 +26,16 @@
                     <td>{{ $tarea->descripcion }}</td>
                     <td>{{ $tarea->fecha_creacion }}</td>
                     <td>{{ $tarea->estado }}</td>
-                    <td><a href="{{ route('tareas.show', $tarea->id) }}" class="btn btn-primary">Ver Detalles</a></td>
+                    <td>
+                        <a href="{{ route('tareas.show', $tarea->id) }}" class="btn btn-primary">Ver Detalles</a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
     <div class="text-center mt-4">
-        <form class="d-flex" role="search">
-            <a href="/tareas/create" class="btn btn-outline-primary mr-3">Agregar Tarea</a>
-            <a href="/home" class="btn btn-outline-primary">Inicio</a>
-        </form>
+        <a href="/tareas/create" class="btn btn-outline-primary mr-3">Agregar Tarea</a>
+        <a href="/home" class="btn btn-outline-primary">Inicio</a>
     </div>
 </div>
 @endsection

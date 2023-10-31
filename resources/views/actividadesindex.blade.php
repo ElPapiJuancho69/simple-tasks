@@ -6,7 +6,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
+                <!-- Columna ID eliminada -->
                 <th>Descripción de la Actividad</th>
                 <th>Fecha de Actividad</th>
             </tr>
@@ -14,14 +14,12 @@
         <tbody>
             @foreach($actividades as $actividad)
                 <tr>
-                    <td>{{ $actividad->id }}</td>
+                    <!-- Columna ID eliminada -->
                     <td>{{ $actividad->tareas->descripcion }}</td>
-                    <td>{{ $actividad->fecha_actividad }}</td>
+                    <td>{{ $actividad->tareas->fecha_creacion }}</td> <!-- Cambio aquí -->
                 </tr>
             @endforeach
         </tbody>
-        <tr>
-        </tr>
     </table>
     <div class="text-center mb-4">
         <a href="/actividades/create" class="btn btn-outline-primary mr-3">Agregar Actividad</a>

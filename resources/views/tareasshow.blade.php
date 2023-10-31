@@ -4,13 +4,15 @@
 <div class="container">
     <script>
         function confirmDelete(id) {
+            console.log('Confirmación de eliminación llamada para el la tarea con ID: ' + id);
             if (confirm("¿Estás seguro de que quieres eliminar esta tarea?")) {
                 // Si el usuario confirma, redirigir al controlador para eliminar la tarea
-                window.location.href = '/tareas/delete/' + id;
+                window.location.href = '/tarea/delete/' + id;
             }
         }
     </script>
-    <h1 class="display-6">Detalles de Tarea</h1>
+    
+    <h1 class="display-6">Detalles de la tarea</h1>
     <hr style="color: #000000;" />
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -19,17 +21,17 @@
                     Tarea
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">{{$tarea->titulo}}</h5>
+                    <h5 class="card-title">{{$tarea->id}}</h5>
                     <br>
+                    <p class="card-text">Titulo de la tarea: {{$tarea->titulo}}</p>
                     <p class="card-text">Descripcion: {{$tarea->descripcion}}</p>
-                    <p class="card-text">Estado: {{$tarea->estado}}</p>
-                    <p class="card-text">Usuario: {{$tarea->usuario_id}}</p>
+                    <p class="card-text">Fecha creacion: {{$tarea->fecha_creacion}}</p>
+                    <p class="card-text">Numero Total de Tareas Pendientes: {{$tarea->estado}}</p>
+
                     <!-- Botones de editar y eliminar con formato de Bootstrap -->
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-
-                        <!-- Botón para editar el cliente -->
-                        <a href="{{ route('tareas.edit', $tarea->id) }}" class="btn btn-success" role="button">Editar</a>
-
+                        <a href="{{ route('tareas.edit', $tarea->id) }}" class="btn btn-primary">Editar</a>
+                        
                         <!-- Botón de eliminación -->
                         <form method="POST" action="{{ route('tareas.destroy', $tarea->id) }}">
                             @csrf
@@ -42,7 +44,7 @@
                     {{$tarea->id}}
                 </div>
             </div>
-            <a href="/tareas" class="btn btn-primary mt-3">Regresar</a>
+            <a href="{{ route('tareas.index') }}" class="btn btn-primary mt-3">Regresar</a>
         </div>
     </div>
     <script>

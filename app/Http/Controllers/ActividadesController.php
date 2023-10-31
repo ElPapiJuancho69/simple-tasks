@@ -16,8 +16,11 @@ class ActividadesController extends Controller
     
     public function create()
     {
-        return view('actividadescreate');
+        $tarea = tareas::all(); // Esto recupera todas las tareas disponibles
+    
+        return view('actividadescreate', compact('tarea'));
     }
+    
 
     public function store(Request $request)
     {

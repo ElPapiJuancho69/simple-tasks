@@ -10,6 +10,7 @@ class UsersController extends Controller
         
         $usuarios = User::all(); // Obtén todos los usuarios
         return view('users.index', compact('usuarios'));
+        
     }
     
 }

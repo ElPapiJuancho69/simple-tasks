@@ -8,33 +8,28 @@
     @method('PUT') {{-- Usa el método PUT para actualización --}}
 
     <div class="col-md-6">
-        <label  for="titulo" class="form-label">Título:</label>
-        <input type="text" name="titulo"  class="form-control" value="{{$tarea->titulo}}" required>
+        <label for="titulo" class="form-label">Título:</label>
+        <input type="text" name="titulo" class="form-control" value="{{$tarea->titulo}}" required>
     </div>
 
     <div class="col-md-6">
         <label for="descripcion" class="form-label">Descripción:</label>
         <input name="descripcion" class="form-control" value="{{$tarea->descripcion}}" required>
-    </div class="col-md-6">
+    </div>
 
     <div class="col-md-6">
         <label for="fecha_creacion" class="form-label">Fecha de Creación:</label>
         <input type="date" name="fecha_creacion" class="form-control" value="{{$tarea->fecha_creacion}}" required>
-    </div>    
+    </div>
 
     <div class="col-md-6">
         <label for="estado" class="form-label">Estado:</label>
-        <select name="estado"  class="form-select" value="{{$tarea->estado}}" required>
-            <option value="pendiente">Pendiente</option>
-            <option value="completada">Completada</option>
-        </select>
+        {!! Form::select('estado', ['pendiente' => 'Pendiente', 'completada' => 'Completada'], $tarea->estado, ['class' => 'form-select', 'required' => 'required']) !!}
     </div>
 
     <div class="col-md-6">
         <label for="usuario_id" class="form-label">Usuario:</label>
-        <!-- Aquí puedes agregar un menú desplegable para seleccionar el usuario -->
-        <input name="usuario_id"  class="form-control" value="{{$tarea->usuario_id}}" required>
-        </select>
+        {!! Form::select('usuario_id', $usuarios->pluck('name', 'id'), $tarea->usuario_id, ['class' => 'form-select', 'required' => 'required']) !!}
     </div>
 
     <button type="submit" class="btn btn-primary">Guardar Cambios</button>

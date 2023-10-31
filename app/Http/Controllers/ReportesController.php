@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\reportes;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class ReportesController extends Controller
 {
@@ -17,8 +18,10 @@ class ReportesController extends Controller
 
     public function create()
     {
-        return view('reportescreate');
+        $usuarios = User::all(); // Obtén todos los usuarios
+        return view('reportescreate', compact('usuarios'));
     }
+
 
     public function store(Request $request)
     {    try{
@@ -26,7 +29,7 @@ class ReportesController extends Controller
         $reporte->fecha_generacion = now();
         $reporte->num_total_tareas = $request->input('num_total_tareas');
         $reporte->num_total_tareas_completadas = $request->input('num_total_tareas_completadas'); // Puedes establecer un valor predeterminado para el estado
-        $reporte->num_tareas_pendientes = $request->input('num_total_tareas_completadas'); // Puedes establecer un valor predeterminado para el estado
+        $reporte->num_tareas_pendientes = $request->input('num_tareas_pendientes'); // Puedes establecer un valor predeterminado para el estado
         $reporte->usuario_id = $request->input('usuario_id'); // Asegúrate de tener el campo usuario_id en el formulario.
 
         $reporte->save();

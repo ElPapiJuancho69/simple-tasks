@@ -4,12 +4,14 @@
 <div class="container">
     <script>
         function confirmDelete(id) {
+            console.log('Confirmación de eliminación llamada para el reporte con ID: ' + id);
             if (confirm("¿Estás seguro de que quieres eliminar este reporte?")) {
-                // Si el usuario confirma, redirigir al controlador para eliminar el paciente
+                // Si el usuario confirma, redirigir al controlador para eliminar la tarea
                 window.location.href = '/reporte/delete/' + id;
             }
         }
     </script>
+    
     <h1 class="display-6">Detalles de Reporte</h1>
     <hr style="color: #000000;" />
     <div class="row justify-content-center">
