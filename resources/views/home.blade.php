@@ -1,5 +1,5 @@
-@extends('layouts.app')
 @section('title', 'Página Principal')
+@extends('layouts.app')
 @section('content')
     <div class="container mt-4">
         <!-- Barra de navegación -->

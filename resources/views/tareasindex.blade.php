@@ -22,7 +22,13 @@
             @foreach($tareas as $tarea)
                 <tr>
                     <td>{{ $tarea->id }}</td>
-                    <td>{{ $tarea->titulo }}</td>
+                    <td>
+                        @if ($tarea->estado === 'completado')
+                            <span class="completed-title">{{ $tarea->titulo }}</span>
+                        @else
+                            {{ $tarea->titulo }}
+                        @endif
+                    </td>
                     <td>{{ $tarea->descripcion }}</td>
                     <td>{{ $tarea->fecha_creacion }}</td>
                     <td>{{ $tarea->estado }}</td>
@@ -34,6 +40,7 @@
         </tbody>
     </table>
     <div class="text-center mt-4">
+        <a href="{{ route('listadotareas.pdf') }}" class="btn btn-primary">PDF</a>
         <a href="/tareas/create" class="btn btn-outline-primary mr-3">Agregar Tarea</a>
         <a href="/home" class="btn btn-outline-primary">Inicio</a>
     </div>

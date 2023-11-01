@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use App\Models\tareas;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\pdf as PDF;
+
 
 class TareasController extends Controller
 {
@@ -64,7 +66,12 @@ class TareasController extends Controller
             return redirect()->route('tareas.index')->with('error', 'Tarea no encontrada.');
         }
     }
-    
+    public function PDF()
+    {
+        $tareas = tareas::all();
+        $pdf    = PDF::loadView('pdf.listadotareas', compact('tareas'));
+        return $pdf->download('listadotareas.pdf');
+    }
 
     public function update(Request $request, $id)
     {

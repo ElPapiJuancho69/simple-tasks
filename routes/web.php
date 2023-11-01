@@ -4,7 +4,7 @@ use App\Http\Controllers\ActividadesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReportesController;
 use App\Http\Controllers\TareasController;
-
+use App\Http\Controllers\ApiSearchController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,8 +17,9 @@ use App\Http\Controllers\TareasController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
+
 Route::get('actividades/create',[ActividadesController::class, 'create']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -40,6 +41,25 @@ Route::put('/reportes/{id}',[ReportesController::class, 'update']);
 Route::delete('/reportes/delete/{id}',[ReportesController::class, 'destroy']);
 Route::resource('/reportes', ReportesController::class);
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//PDF
+Route::get('/generate-pdf', 'PDFController@generatePDF');
+Route::get('descargar-tareas', [TareasController::class, 'pdf'])->name('listadotareas.pdf');
+
+//Angolia
+Route::get('search', function() {
+    $query = 'reportes'; // <-- Change the query for testing.
+
+    $tareas = App\Tarea::search($query)->get();
+
+    return $tareas;
+});
+
+Route::get('/search', 'ApiSearchController@search')->name('api.search');
 
 Auth::routes();
 
