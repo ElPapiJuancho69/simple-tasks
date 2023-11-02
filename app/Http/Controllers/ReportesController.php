@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use App\Models\reportes;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\pdf as PDF;
+
 
 class ReportesController extends Controller
 {
@@ -42,6 +44,12 @@ class ReportesController extends Controller
     }
     
     
+    public function PDF()
+    {
+        $reportes = reportes::all();
+        $pdf    = PDF::loadView('pdf.listadoreportes', compact('reportes'));
+        return $pdf->download('listadoreportes.pdf');
+    }
 
     public function show($id)
     {

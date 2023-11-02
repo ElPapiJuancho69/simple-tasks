@@ -10,10 +10,18 @@ use Barryvdh\DomPDF\Facade\pdf as PDF;
 
 class TareasController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $tareas = tareas::all(); // Obtener todos los registros de tareas
-        return view('tareasindex', compact('tareas'));
+        $query = $request->input('query');
+    
+        if ($query) {
+            $results = tareas::search($query)->get();
+            $tareas = tareas::with('usuario')->get(); // Obtener todos los pacientes para mostrar junto con los resultados de búsqueda
+            return view('tareasindex', compact('tareas', 'results'));
+        } else {
+            $tareas = tareas::with('usuario')->get();
+            return view('tareasindex', compact('tareas'));
+        }
     }
     
     

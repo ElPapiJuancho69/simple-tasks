@@ -6,7 +6,51 @@
         <div class="container-fluid">
             <h1 class="display-10">Listado de Tareas</h1>
         </div>
+        <form action="/search" method="GET" class="d-flex" role="search">
+            <input type="search" name="query" placeholder="Buscar..." class="form-control me-2" >
+            <button class="btn btn-outline-success" type="submit">Buscar</button>
+        </form>
     </nav>
+    @if(isset($results) && count($results) > 0)
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Descripción</th>
+                <th>Fecha de Creación</th>
+                <th>Estado</th>
+                <th>Acciones</th> <!-- Nueva columna para acciones -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($results as $tarea)
+                <tr>
+                    <td>{{ $tarea->id }}</td>
+                    <td>
+                        @if ($tarea->estado === 'completado')
+                            <span class="completed-title">{{ $tarea->titulo }}</span>
+                        @else
+                            {{ $tarea->titulo }}
+                        @endif
+                    </td>
+                    <td>{{ $tarea->descripcion }}</td>
+                    <td>{{ $tarea->fecha_creacion }}</td>
+                    <td>{{ $tarea->estado }}</td>
+                    <td>
+                        <a href="{{ route('tareas.show', $tarea->id) }}" class="btn btn-primary">Ver Detalles</a>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+    <div class="text-center mt-4">
+        <a href="{{ url('/tareas') }}" class="btn btn-primary">Mostrar Todos</a>
+    </div>
+
+
+    @else
+
     <table class="table">
         <thead>
             <tr>
@@ -39,6 +83,7 @@
             @endforeach
         </tbody>
     </table>
+    @endif
     <div class="text-center mt-4">
         <a href="{{ route('listadotareas.pdf') }}" class="btn btn-primary">PDF</a>
         <a href="/tareas/create" class="btn btn-outline-primary mr-3">Agregar Tarea</a>

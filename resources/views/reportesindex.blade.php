@@ -35,6 +35,7 @@
     <div class="text-center mt-4">
         <a href="/reportes/create" class="btn btn-outline-primary mr-3">Agregar Reporte</a>
         <a href="/home" class="btn btn-outline-primary">Inicio</a>
-    </div>
+        <a href="{{ route('listadoreportes.pdf') }}" class="btn btn-primary">PDF</a>
+    </div>  
 </div>
 @endsection

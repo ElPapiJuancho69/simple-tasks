@@ -24,6 +24,7 @@ Route::get('actividades/create',[ActividadesController::class, 'create']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('/actividades', ActividadesController::class);
+Route::get('/search', [ActividadesController::class, 'index']);
 
 
 Route::resource('/tareas', TareasController::class);
@@ -32,6 +33,7 @@ Route::get('/tareas/show/{id}',[TareasController::class, 'show']);
 Route::get('/tareas/edit/{id}',[TareasController::class, 'edit']);
 Route::put('/tareas/{id}',[TareasController::class, 'update']);
 Route::delete('/tareas/delete/{id}',[TareasController::class, 'destroy']);
+Route::get('/search', [TareasController::class, 'index']);
 
 
 Route::get('/reportes/create', [ReportesController::class, 'create']);
@@ -49,17 +51,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //PDF
 Route::get('/generate-pdf', 'PDFController@generatePDF');
 Route::get('descargar-tareas', [TareasController::class, 'pdf'])->name('listadotareas.pdf');
+Route::get('descargar-actividades', [ActividadesController::class, 'pdf'])->name('listadoactividades.pdf');
+Route::get('descargar-reportes', [ReportesController::class, 'pdf'])->name('listadoreportes.pdf');
 
-//Angolia
-Route::get('search', function() {
-    $query = 'reportes'; // <-- Change the query for testing.
-
-    $tareas = App\Tarea::search($query)->get();
-
-    return $tareas;
-});
-
-Route::get('/search', 'ApiSearchController@search')->name('api.search');
 
 Auth::routes();
 

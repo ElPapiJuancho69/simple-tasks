@@ -5,13 +5,23 @@ use App\Http\Controllers\Controller;
 use App\Models\Actividades;
 use Illuminate\Http\Request;
 use App\Models\tareas;
+use Barryvdh\DomPDF\Facade\pdf as PDF;
+
 
 class ActividadesController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $actividades = Actividades::all(); // Cambié $actividaddes a $actividades
-        return view('ActividadesIndex', compact('actividades'));
+        $query = $request->input('query');
+    
+        if ($query) {
+            $actividades = Actividades::search($query)->get();
+            $actividades = Actividades::with('tareas')->get(); // Obtener todos los pacientes para mostrar junto con los resultados de búsqueda
+            return view('actividadesindex', compact('actividades', 'results'));
+        } else {
+            $actividades = Actividades::with('tareas')->get();
+            return view('actividadesindex', compact('actividades'));
+        }
     }
     
     public function create()
@@ -52,6 +62,12 @@ class ActividadesController extends Controller
         } else {
             return redirect()->route('actividades.index')->with('error', 'actividad no encontrada.');
         }        
+    }
+    public function PDF()
+    {
+        $actividades = Actividades::all();
+        $pdf    = PDF::loadView('pdf.listadoactividades', compact('actividades'));
+        return $pdf->download('listadoactividades.pdf');
     }
 
     public function edit($id)
