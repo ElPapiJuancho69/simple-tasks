@@ -24,7 +24,7 @@ Route::get('actividades/create',[ActividadesController::class, 'create']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('/actividades', ActividadesController::class);
-Route::get('/search', [ActividadesController::class, 'index']);
+Route::get('/searchactividades', [ActividadesController::class, 'index']);
 
 
 Route::resource('/tareas', TareasController::class);

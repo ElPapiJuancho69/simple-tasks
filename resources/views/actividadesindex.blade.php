@@ -18,7 +18,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($actividades as $actividad)
+        @foreach($results as $actividad)
             <tr>
                 <!-- Columna ID eliminada -->
                 <td>{{ $actividad->tareas->descripcion }}</td>
@@ -26,6 +26,7 @@
             </tr>
         @endforeach
     </tbody>
+    
 </table>
 <div class="text-center mt-4">
     <a href="{{ url('/actividades') }}" class="btn btn-primary">Mostrar Todos</a>

@@ -11,18 +11,20 @@ use Barryvdh\DomPDF\Facade\pdf as PDF;
 class ActividadesController extends Controller
 {
     public function index(Request $request)
-    {
-        $query = $request->input('query');
-    
-        if ($query) {
-            $actividades = Actividades::search($query)->get();
-            $actividades = Actividades::with('tareas')->get(); // Obtener todos los pacientes para mostrar junto con los resultados de búsqueda
-            return view('actividadesindex', compact('actividades', 'results'));
-        } else {
-            $actividades = Actividades::with('tareas')->get();
-            return view('actividadesindex', compact('actividades'));
-        }
+{
+    $query = $request->input('query');
+
+    if ($query) {
+        $results = Actividades::search($query)->get();
+        $actividades = Actividades::with('tareas')->get(); // Obtener todos los pacientes para mostrar junto con los resultados de búsqueda
+      
+        return view('actividadesindex', compact('actividades', 'results'));
+    } else {
+        $actividades = Actividades::with('tareas')->get();
+        return view('actividadesindex', compact('actividades'));
     }
+}
+
     
     public function create()
     {
