@@ -43,24 +43,22 @@
     <table>
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Título</th>
                 <th>Descripción</th>
                 <th>Fecha de Creación</th>
                 <th>Estado</th>
-                <th>ID de Usuario</th>
+                <th>Usuario</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($tareas as $tarea)
-                <tr>
-                    <td>{{ $tarea->id }}</td>
-                    <td>{{ $tarea->titulo }}</td>
-                    <td>{{ $tarea->descripcion }}</td>
-                    <td>{{ $tarea->fecha_creacion }}</td>
-                    <td>{{ $tarea->estado }}</td>
-                    <td>{{ $tarea->usuario_id }}</td>
-                </tr>
+            <tr>
+                <td>{{ $tarea->titulo }}</td>
+                <td>{{ $tarea->descripcion }}</td>
+                <td>{{ $tarea->fecha_creacion }}</td>
+                <td>{{ $tarea->estado }}</td>
+                <td>{{ $tarea->usuario->name }}</td>
+            </tr>
             @endforeach
         </tbody>
     </table>

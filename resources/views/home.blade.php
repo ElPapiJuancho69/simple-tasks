@@ -1,34 +1,9 @@
 @section('title', 'Página Principal')
 @extends('layouts.app')
 @section('content')
-    <div class="container mt-4">
-        <!-- Barra de navegación -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Simple Tasks</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('tareas.index') }}">Tareas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('actividades.index') }}">Actividades</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('reportes.index') }}">Reportes</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-    <div style="display: flex; justify-content: center; align-items: center; height: 50vh;">
+    <div class="text-center mt-5">
         <img src="{{ asset('imagenes/image.jpeg') }}" class="img-fluid" alt="Descripción de la imagen" style="max-width: 1750px; max-height: 820px;">
     </div>
-    
-<!-- Sección de Tareas -->
 <div class="container mt-4">
     <div class="card">
         <div class="card-body">
@@ -78,5 +53,5 @@
             </div>
         </div>
     </div>
-    <!-- Código de instalación Cliengo para xdiaz69x@gmail.com --> <script type="text/javascript">(function () { var ldk = document.createElement('script'); ldk.type = 'text/javascript'; ldk.async = true; ldk.src = 'https://s.cliengo.com/weboptimizer/65443f285055a50032ff278e/65443f2a5055a50032ff2791.js?platform=view_installation_code'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ldk, s); })();</script>
+<script type="text/javascript">(function () { var ldk = document.createElement('script'); ldk.type = 'text/javascript'; ldk.async = true; ldk.src = 'https://s.cliengo.com/weboptimizer/65443f285055a50032ff278e/65443f2a5055a50032ff2791.js?platform=view_installation_code'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ldk, s); })();</script>
 @endsection

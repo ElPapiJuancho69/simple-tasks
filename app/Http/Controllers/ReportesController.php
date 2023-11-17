@@ -6,6 +6,7 @@ use App\Models\reportes;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\pdf as PDF;
+use Illuminate\Support\Facades\Validator;
 
 
 class ReportesController extends Controller
@@ -26,22 +27,27 @@ class ReportesController extends Controller
 
 
     public function store(Request $request)
-    {    try{
+    {
+        $validatedData = $request->validate([
+            'num_total_tareas' => 'required|numeric', // Reemplaza 'numeric' por el tipo de dato correcto
+            'num_total_tareas_completadas' => 'required|numeric', // Reemplaza 'numeric' por el tipo de dato correcto
+            'num_tareas_pendientes' => 'required|numeric', // Reemplaza 'numeric' por el tipo de dato correcto
+            'usuario_id' => 'required|exists:users,id', // Asegura que el usuario exista en la tabla "users"
+        ]);
+    
         $reporte = new reportes();
         $reporte->fecha_generacion = now();
         $reporte->num_total_tareas = $request->input('num_total_tareas');
-        $reporte->num_total_tareas_completadas = $request->input('num_total_tareas_completadas'); // Puedes establecer un valor predeterminado para el estado
-        $reporte->num_tareas_pendientes = $request->input('num_tareas_pendientes'); // Puedes establecer un valor predeterminado para el estado
-        $reporte->usuario_id = $request->input('usuario_id'); // Asegúrate de tener el campo usuario_id en el formulario.
-
+        $reporte->num_total_tareas_completadas = $request->input('num_total_tareas_completadas');
+        $reporte->num_tareas_pendientes = $request->input('num_tareas_pendientes');
+        $reporte->usuario_id = $request->input('usuario_id');
+    
         $reporte->save();
     
         return redirect()->route('reportes.index');
-    } catch (\Illuminate\Database\QueryException $e) {
-        // Manejar la excepción de la base de datos (error de llave foránea)
-        return redirect("/reportes/create")->with('error', 'No existe el usuario');
     }
-    }
+    
+    
     
     
     public function PDF()
@@ -64,10 +70,8 @@ class ReportesController extends Controller
 
     public function edit($id)
     {
-        // Aquí debes buscar el cliente por su ID, suponiendo que tienes un modelo llamado "patient"
      $reporte = reportes::find($id);
     
-        // Luego, puedes retornar la vista de edición junto con el cliente encontrado
         return view('reportesedit', compact('reporte'));    }
 
     public function update(Request $request, $id)

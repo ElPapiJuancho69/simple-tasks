@@ -51,10 +51,9 @@
 
     @else
 
-    <table class="table">
+    <table class="table table-striped table-bordered">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Título</th>
                 <th>Descripción</th>
                 <th>Fecha de Creación</th>
@@ -65,7 +64,6 @@
         <tbody>
             @foreach($tareas as $tarea)
                 <tr>
-                    <td>{{ $tarea->id }}</td>
                     <td>
                         @if ($tarea->estado === 'completado')
                             <span class="completed-title">{{ $tarea->titulo }}</span>

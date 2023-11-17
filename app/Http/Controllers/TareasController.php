@@ -33,20 +33,26 @@ class TareasController extends Controller
     }
 
     public function store(Request $request)
-    {    try{
+    {
+        $validatedData = $request->validate([
+            'titulo' => 'required|max:255',
+            'descripcion' => 'max:255', // Puedes ajustar el límite de caracteres según tus necesidades
+            'estado' => 'in:pendiente,completada', // Valida que el estado sea "pendiente" o "completada"
+            'usuario_id' => 'required|exists:users,id', // Asegura que el usuario exista en la tabla "users"
+        ]);
+    
         $tarea = new tareas();
-        $tarea->titulo = $request->input('titulo');
-        $tarea->descripcion = $request->input('descripcion');
-        $tarea->fecha_creacion = now(); // Establecer la fecha actual
-        $tarea->estado = $request->input('estado'); // Puedes establecer un valor predeterminado para el estado
-        $tarea->usuario_id = $request->input('usuario_id'); // Asegúrate de tener el campo usuario_id en el formulario.
+        $tarea->titulo = $validatedData['titulo'];
+        $tarea->descripcion = $validatedData['descripcion'];
+        $tarea->fecha_creacion = now();
+        $tarea->estado = $validatedData['estado'];
+        $tarea->usuario_id = $validatedData['usuario_id'];
+    
         $tarea->save();
+    
         return redirect()->route('tareas.index');
-    } catch (\Illuminate\Database\QueryException $e) {
-        // Manejar la excepción de la base de datos (error de llave foránea)
-        return redirect("/tareas/create")->with('error', 'No se existe el usuario');
     }
-    }
+    
     
     
     public function show($id)

@@ -20,11 +20,6 @@
             <input type="date" name="fecha_actividad" class="form-control" id="fecha_actividad">
         </div>
 
-        <div class="form-group">
-            <label for="descripcion_actividad">Descripción de Actividad:</label>
-            <input type="text" name="descripcion_actividad" class="form-control" id="descripcion_actividad">
-        </div>
-
         <div class="col-md-6">
             <label for="tarea_id" class="form-label">Tarea:</label>
             <select name="tarea_id" id="tarea_id" class="form-select" required>

@@ -38,7 +38,7 @@ class ActividadesController extends Controller
     {
         try{
         $actividad = new Actividades();
-            
+
         $actividad->fecha_actividad = $request->input('fecha_actividad');
         $actividad->descripcion_actividad = $request->input('descripcion_actividad');
         $actividad->tarea_id = $request->input('tarea_id');
@@ -52,7 +52,6 @@ class ActividadesController extends Controller
         // Manejar la excepción de la base de datos (error de llave foránea)
         return redirect("/actividades/create")->with('error', 'La tarea no existe');
     }
-
     }
     
     public function show($id)

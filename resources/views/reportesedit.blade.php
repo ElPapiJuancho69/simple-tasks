@@ -24,12 +24,6 @@
     {{ Form::label('num_tareas_pendientes', 'Número de Tareas Pendientes:', ['class' => 'form-label']) }}
     {{ Form::number('num_tareas_pendientes', null, ['class' => 'form-control', 'required' => 'required']) }}
 </div>
-
-<div class="col-md-6">
-    {{ Form::label('usuario_id', 'Usuario:', ['class' => 'form-label']) }}
-    {{ Form::select('usuario_id', $usuarios->pluck('name', 'id'), null, ['class' => 'form-select', 'required' => 'required']) }}
-</div>
-
 {{ Form::submit('Guardar Cambios', ['class' => 'btn btn-primary']) }}
 {!! Form::close() !!}
 </form>
