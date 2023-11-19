@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\tareas;
@@ -34,24 +33,34 @@ class TareasController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'titulo' => 'required|max:255',
-            'descripcion' => 'max:255', // Puedes ajustar el límite de caracteres según tus necesidades
-            'estado' => 'in:pendiente,completada', // Valida que el estado sea "pendiente" o "completada"
-            'usuario_id' => 'required|exists:users,id', // Asegura que el usuario exista en la tabla "users"
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'titulo' => 'required|max:255',
+                'descripcion' => 'max:255',
+                'estado' => 'in:pendiente,completada',
+                'fecha_creacion' => 'required|date|after_or_equal:yesterday',
+                'usuario_id' => 'required|exists:users,id',
+            ], [
+                'fecha_creacion.after_or_equal' => 'La fecha de creación debe ser igual o posterior a hoy.',
+            ]);
     
-        $tarea = new tareas();
-        $tarea->titulo = $validatedData['titulo'];
-        $tarea->descripcion = $validatedData['descripcion'];
-        $tarea->fecha_creacion = now();
-        $tarea->estado = $validatedData['estado'];
-        $tarea->usuario_id = $validatedData['usuario_id'];
+            $tarea = new Tareas();
+            $tarea->titulo = $validatedData['titulo'];
+            $tarea->descripcion = $validatedData['descripcion'];
+            $tarea->fecha_creacion = $validatedData['fecha_creacion']; // Cambia el formato si es necesario
+            $tarea->estado = $validatedData['estado'];
+            $tarea->usuario_id = $validatedData['usuario_id'];
     
-        $tarea->save();
+            $tarea->save();
     
-        return redirect()->route('tareas.index');
+            return redirect()->route('tareas.index');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors())->withInput();
+        }
     }
+    
+    
+    
     
     
     
@@ -89,16 +98,6 @@ class TareasController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Validación de datos
-        $this->validate($request, [
-            'titulo' => 'required',
-            'descripcion' => 'required',
-            'fecha_creacion' => 'required',
-            'estado' => 'required',
-            'usuario_id' => 'required',
-        ]);
-
-        // Obtener el cliente a actualizar
         $tarea = tareas::find($id);
 
         if (!$tarea) {

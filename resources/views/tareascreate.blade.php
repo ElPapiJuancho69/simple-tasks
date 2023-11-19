@@ -2,6 +2,16 @@
 @section('title', 'Tareas Create')
 @section('content')
 <h1 class="display-6">Crear una Tarea</h1>
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <script>
     @if(session('success'))
         alert("{{ session('success') }}");
@@ -25,6 +35,12 @@
 <div class="col-md-6">
     {{ Form::label('fecha_creacion', 'Fecha de Creación:', ['class' => 'form-label']) }}
     {{ Form::date('fecha_creacion', null, ['class' => 'form-control']) }}
+
+    @error('fecha_creacion')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
 </div>
 
 <div class="col-md-6">

@@ -27,4 +27,13 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof \ErrorException && strpos($exception->getMessage(), 'Undefined index: date') !== false) {
+            return response()->view('errors.no_date_error', ['exception' => $exception]);
+        }
+
+        return parent::render($request, $exception);
+    }
 }

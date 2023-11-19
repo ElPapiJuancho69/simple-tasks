@@ -161,6 +161,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -178,6 +179,8 @@ return [
         // 'Example' => App\Facades\Example::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'debug' => env('APP_DEBUG', false),
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
     ])->toArray(),
 
 ];
