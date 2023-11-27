@@ -40,19 +40,26 @@ class TareasController extends Controller
                 'estado' => 'in:pendiente,completada',
                 'fecha_creacion' => 'required|date|after_or_equal:yesterday',
                 'usuario_id' => 'required|exists:users,id',
+                'imagen' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
             ], [
                 'fecha_creacion.after_or_equal' => 'La fecha de creación debe ser igual o posterior a hoy.',
             ]);
-    
+
             $tarea = new Tareas();
             $tarea->titulo = $validatedData['titulo'];
             $tarea->descripcion = $validatedData['descripcion'];
-            $tarea->fecha_creacion = $validatedData['fecha_creacion']; // Cambia el formato si es necesario
+            $tarea->fecha_creacion = $validatedData['fecha_creacion'];
             $tarea->estado = $validatedData['estado'];
             $tarea->usuario_id = $validatedData['usuario_id'];
-    
+
+            if ($request->hasFile('imagen')) {
+                $imageName = time() . '.' . $request->imagen->extension();
+                $request->imagen->move(public_path('imagenes'), $imageName);
+                $tarea->imagen = $imageName;
+            }
+
             $tarea->save();
-    
+
             return redirect()->route('tareas.index');
         } catch (\Illuminate\Validation\ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
@@ -101,21 +108,41 @@ class TareasController extends Controller
         $tarea = tareas::find($id);
 
         if (!$tarea) {
-            // Manejar el caso en que el cliente no se encuentra
             return redirect()->route('tareas.index')->with('error', 'Tarea no encontrada');
         }
 
-        // Actualizar los datos del cliente
+        $request->validate([
+            'titulo' => 'required|max:255',
+            'descripcion' => 'max:255',
+            'estado' => 'in:pendiente,completada',
+            'fecha_creacion' => 'required|date|after_or_equal:yesterday',
+            'usuario_id' => 'required|exists:users,id',
+            'imagen' => 'image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+        ]);
+
         $tarea->titulo = $request->input('titulo');
         $tarea->descripcion = $request->input('descripcion');
         $tarea->fecha_creacion = $request->input('fecha_creacion');
         $tarea->estado = $request->input('estado');
         $tarea->usuario_id = $request->input('usuario_id');
 
+        if ($request->hasFile('imagen')) {
+            $imageName = time() . '.' . $request->imagen->extension();
+            $request->imagen->move(public_path('imagenes'), $imageName);
+
+            // Borrar la imagen anterior si existe
+            $imagePath = public_path('imagenes/' . $tarea->imagen);
+            if (file_exists($imagePath) && is_file($imagePath)) {
+                unlink($imagePath);
+            }
+
+            $tarea->imagen = $imageName;
+        }
+
         $tarea->save();
 
-        return redirect()->route('tareas.show', $tarea->id)->with('success', 'tarea actualizada con éxito');
-}
+        return redirect()->route('tareas.show', $tarea->id)->with('success', 'Tarea actualizada con éxito');
+    }
 
 
 public function destroy($id)

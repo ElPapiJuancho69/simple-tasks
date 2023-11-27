@@ -14,7 +14,7 @@
 
     <div class="col-md-6">
         <label for="descripcion" class="form-label">Descripción:</label>
-        <input name="descripcion" class="form-control" value="{{$tarea->descripcion}}" required>
+        <input name="descripcion" class="form-control" value="{{$tarea->descripcion}}">
     </div>
 
     <div class="col-md-6">

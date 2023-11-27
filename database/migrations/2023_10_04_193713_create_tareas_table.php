@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('estado');
             $table->unsignedBigInteger('usuario_id');
             $table->foreign('usuario_id')->references('id')->on('users');
+            $table->string('imagen')->nullable();
             $table->timestamps();
         });
     }

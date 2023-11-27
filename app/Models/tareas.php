@@ -9,7 +9,7 @@ class Tareas extends Model
 {
     use HasFactory;
     use Searchable;
-    protected $fillable = ['titulo', 'descripcion'];
+    protected $fillable = ['titulo', 'descripcion', 'imagen'];
     public function usuario()
 {
     return $this->belongsTo(User::class, 'usuario_id');

@@ -4,7 +4,7 @@
 <div class="container">
     <script>
         function confirmDelete(id) {
-            console.log('Confirmación de eliminación llamada para el la tarea con ID: ' + id);
+            console.log('Confirmación de eliminación llamada para la tarea con ID: ' + id);
             if (confirm("¿Estás seguro de que quieres eliminar esta tarea?")) {
                 // Si el usuario confirma, redirigir al controlador para eliminar la tarea
                 window.location.href = '/tarea/delete/' + id;
@@ -26,7 +26,14 @@
                     <p class="card-text">Titulo de la tarea: {{$tarea->titulo}}</p>
                     <p class="card-text">Descripcion: {{$tarea->descripcion}}</p>
                     <p class="card-text">Fecha creacion: {{$tarea->fecha_creacion}}</p>
-                    <p class="card-text">Numero Total de Tareas Pendientes: {{$tarea->estado}}</p>
+                    <p class="card-text">Número Total de Tareas Pendientes: {{$tarea->estado}}</p>
+
+                    <!-- Mostrar la imagen -->
+                    @if($tarea->imagen)
+                        <img style="height: 500px; width: 500px; background-color: #EFEFEF; margin: 20px;" src="{{ asset('imagenes/' . $tarea->imagen) }}" alt="Imagen de la tarea">
+                    @else
+                        <p>No hay imagen disponible</p>
+                    @endif
 
                     <!-- Botones de editar y eliminar con formato de Bootstrap -->
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -55,5 +62,4 @@
         @endif
     </script>
 </div>
-
 @endsection
