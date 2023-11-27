@@ -152,13 +152,13 @@ public function destroy($id)
     if ($tarea) {
         try {
             $tarea->delete();
-            return redirect("/tareas")->with('success', 'reporte eliminado con éxito');
+            return redirect("/tareas")->with('success', 'tarea eliminada con éxito');
         } catch (\Illuminate\Database\QueryException $e) {
             // Manejar la excepción de la base de datos (error de llave foránea)
-            return redirect("/tareas")->with('error', 'No se puede eliminar la reporte. Está siendo utilizada en otra parte del sistema.');
+            return redirect("/tareas")->with('error', 'No se puede eliminar la tarea. Está siendo utilizada en otra parte del sistema.');
         }
     } else {
-        return redirect("/tareas")->with('error', 'reporte no encontrado');
+        return redirect("/tareas")->with('error', 'tarea no encontrada');
     }
 }
 }

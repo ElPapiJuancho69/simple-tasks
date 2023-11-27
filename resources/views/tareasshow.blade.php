@@ -26,7 +26,7 @@
                     <p class="card-text">Titulo de la tarea: {{$tarea->titulo}}</p>
                     <p class="card-text">Descripcion: {{$tarea->descripcion}}</p>
                     <p class="card-text">Fecha creacion: {{$tarea->fecha_creacion}}</p>
-                    <p class="card-text">Número Total de Tareas Pendientes: {{$tarea->estado}}</p>
+                    <p class="card-text">Estado: {{$tarea->estado}}</p>
 
                     <!-- Mostrar la imagen -->
                     @if($tarea->imagen)
