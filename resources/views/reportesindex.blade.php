@@ -12,7 +12,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Fecha de Generación</th>
                 <th>Total de Tareas</th>
                 <th>Tareas Completadas</th>
@@ -22,7 +21,6 @@
         <tbody>
             @foreach($reportes as $reporte)
                 <tr>
-                    <td>{{ $reporte->id }}</td>
                     <td>{{ $reporte->fecha_generacion }}</td>
                     <td>{{ $reporte->num_total_tareas }}</td>
                     <td>{{ $reporte->num_total_tareas_completadas }}</td>

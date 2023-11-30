@@ -12,16 +12,22 @@ class TareasController extends Controller
     public function index(Request $request)
     {
         $query = $request->input('query');
+        $tareas = tareas::with('usuario')->get();
     
         if ($query) {
             $results = tareas::search($query)->get();
-            $tareas = tareas::with('usuario')->get(); // Obtener todos los pacientes para mostrar junto con los resultados de búsqueda
+            
+            if ($results->isEmpty()) {
+                $error = 'No se encontraron resultados para la búsqueda: ' . $query;
+                return redirect()->route('tareas.index')->with('error', $error);
+            }
+    
             return view('tareasindex', compact('tareas', 'results'));
         } else {
-            $tareas = tareas::with('usuario')->get();
             return view('tareasindex', compact('tareas'));
         }
     }
+    
     
     
 

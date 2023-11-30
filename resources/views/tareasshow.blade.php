@@ -18,12 +18,9 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    Tarea
+                    <p class="card-text">Titulo de la tarea: {{$tarea->titulo}}</p>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">{{$tarea->id}}</h5>
-                    <br>
-                    <p class="card-text">Titulo de la tarea: {{$tarea->titulo}}</p>
                     <p class="card-text">Descripcion: {{$tarea->descripcion}}</p>
                     <p class="card-text">Fecha creacion: {{$tarea->fecha_creacion}}</p>
                     <p class="card-text">Estado: {{$tarea->estado}}</p>
@@ -46,9 +43,6 @@
                             <button type="submit" class="btn btn-danger" role="button" onclick="confirmDelete({{ $tarea->id }})">Eliminar</button>
                         </form>
                     </div>
-                </div>
-                <div class="card-footer text-muted">
-                    {{$tarea->id}}
                 </div>
             </div>
             <a href="{{ route('tareas.index') }}" class="btn btn-primary mt-3">Regresar</a>
