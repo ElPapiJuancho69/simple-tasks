@@ -68,7 +68,7 @@ class ActividadesController extends Controller
     {
         $actividades = Actividades::all();
         $pdf    = PDF::loadView('pdf.listadoactividades', compact('actividades'));
-        return $pdf->download('listadoactividades.pdf');
+        return $pdf->stream('listadoactividades.pdf');
     }
 
     public function edit($id)

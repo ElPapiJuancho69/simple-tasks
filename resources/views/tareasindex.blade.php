@@ -11,7 +11,17 @@
                 <button class="btn btn-outline-success" type="submit">Buscar</button>
             </form>
         </nav>
+        @if(session('error'))
+        <div id="alert" class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
 
+    @if(session('success'))
+        <div id="alert" class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
         @if(isset($error))
             <p class="text-center mt-4">{{ $error }}</p>
         @elseif(isset($results) && count($results) > 0)

@@ -21,8 +21,11 @@ class TareasController extends Controller
                 $error = 'No se encontraron resultados para la búsqueda: ' . $query;
                 return redirect()->route('tareas.index')->with('error', $error);
             }
+            else{
+                return view('tareasindex', compact('tareas', 'results'));
+            }
     
-            return view('tareasindex', compact('tareas', 'results'));
+            
         } else {
             return view('tareasindex', compact('tareas'));
         }
@@ -46,7 +49,7 @@ class TareasController extends Controller
                 'estado' => 'in:pendiente,completada',
                 'fecha_creacion' => 'required|date|after_or_equal:yesterday',
                 'usuario_id' => 'required|exists:users,id',
-                'imagen' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+                'imagen' => '|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
             ], [
                 'fecha_creacion.after_or_equal' => 'La fecha de creación debe ser igual o posterior a hoy.',
             ]);
@@ -106,7 +109,7 @@ class TareasController extends Controller
     {
         $tareas = tareas::all();
         $pdf    = PDF::loadView('pdf.listadotareas', compact('tareas'));
-        return $pdf->download('listadotareas.pdf');
+        return $pdf->stream('listadotareas.pdf');
     }
 
     public function update(Request $request, $id)
