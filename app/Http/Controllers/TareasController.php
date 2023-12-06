@@ -4,7 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Models\tareas;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Barryvdh\DomPDF\Facade\pdf as PDF;
+use PDF;
 
 
 class TareasController extends Controller
