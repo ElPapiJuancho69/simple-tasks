@@ -50,7 +50,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //PDF
 Route::get('/generate-pdf', 'PDFController@generatePDF');
-Route::get('descargar-tareas', [TareasController::class, 'pdf'])->name('listadotareas.pdf');
+Route::get('descargar-tareas', [TareasController::class, 'pdf'])->name('Listadotareas.pdf');
 Route::get('descargar-actividades', [ActividadesController::class, 'pdf'])->name('listadoactividades.pdf');
 Route::get('descargar-reportes', [ReportesController::class, 'pdf'])->name('listadoreportes.pdf');
 

@@ -108,8 +108,8 @@ class TareasController extends Controller
     public function PDF()
     {
         $tareas = tareas::all();
-        $pdf    = PDF::loadView('pdf.listadotareas', compact('tareas'));
-        return $pdf->stream('listadotareas.pdf');
+        $pdf    = PDF::loadView('pdf.Listadotareas', compact('tareas'));
+        return $pdf->stream('Listadotareas.pdf');
     }
 
     public function update(Request $request, $id)
