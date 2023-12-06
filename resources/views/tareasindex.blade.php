@@ -96,7 +96,7 @@
         @endif
 
         <div class="text-center mt-4">
-            <a href="{{ route('Listadotareas.pdf') }}" class="btn btn-primary">PDF</a>
+            <a href="{{ route('listadotareas.pdf') }}" class="btn btn-primary">PDF</a>
             <a href="/tareas/create" class="btn btn-outline-primary mr-3">Agregar Tarea</a>
             <a href="/home" class="btn btn-outline-primary">Inicio</a>
         </div>
