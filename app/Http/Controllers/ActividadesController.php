@@ -20,7 +20,7 @@ class ActividadesController extends Controller
       
         return view('actividadesindex', compact('actividades', 'results'));
     } else {
-        $actividades = Actividades::with('actividades')->get();
+        $actividades = Actividades::with('tareas')->get();
         return view('actividadesindex', compact('actividades'));
     }
 }

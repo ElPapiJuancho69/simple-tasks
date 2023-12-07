@@ -13,6 +13,6 @@ class Actividades extends Model
     // Definir la relación con la tabla Tarea
     public function tareas()
     {
-        return $this->belongsTo(tareas::class, 'tarea_id');
+        return $this->hasMany(tareas::class);
     }
 }
