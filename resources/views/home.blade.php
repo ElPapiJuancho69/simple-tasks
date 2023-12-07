@@ -21,22 +21,6 @@
         </div>
     </div>
 
-    <!-- Sección de Actividades -->
-    <div class="container mt-4">
-        <div class="card">
-            <div class="card-body">
-                <h2 class="card-title text-center">Listado de Actividades</h2>
-                <table class="table table-striped">
-                    <!-- Contenido de la tabla de actividades -->
-                </table>
-                <div class="text-center mt-3">
-                    <a href="{{ route('actividades.index') }}" class="btn btn-success mx-2">Ver Actividades</a>
-                    <a href="{{ route('actividades.create') }}" class="btn btn-success mx-2">Agregar una Actividad</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Sección de Reportes -->
     <div class="container mt-4">
         <div class="card">

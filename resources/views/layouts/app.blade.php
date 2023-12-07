@@ -60,9 +60,6 @@
                             <a href="{{ route('tareas.index') }}" class="navbar-brand">Ver Tareas</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('actividades.index') }}" class="navbar-brand">Ver Actividades</a>
-                        </li>
-                        <li class="nav-item">
                             <a href="{{ route('reportes.index') }}" class="navbar-brand">Ver Reportes</a>
                         </li>
                     </ul>

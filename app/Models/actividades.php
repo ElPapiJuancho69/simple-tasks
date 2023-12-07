@@ -11,7 +11,6 @@ class Actividades extends Model
     use HasFactory;
     use Searchable;
 
-    // Definir la relación con la tabla Tarea
     public function tareas()
     {
         return $this->belongsTo(tareas::class, 'tarea_id');
