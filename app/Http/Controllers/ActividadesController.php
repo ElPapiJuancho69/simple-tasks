@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Actividades;
 use Illuminate\Http\Request;
 use App\Models\tareas;
-use Barryvdh\DomPDF\Facade\pdf as PDF;
+use PDF;
 
 
 class ActividadesController extends Controller
@@ -16,11 +16,11 @@ class ActividadesController extends Controller
 
     if ($query) {
         $results = Actividades::search($query)->get();
-        $actividades = Actividades::with('tareas')->get(); // Obtener todos los pacientes para mostrar junto con los resultados de búsqueda
+        $actividades = Actividades::with('tareas')->get(); 
       
         return view('actividadesindex', compact('actividades', 'results'));
     } else {
-        $actividades = Actividades::with('tareas')->get();
+        $actividades = Actividades::with('actividades')->get();
         return view('actividadesindex', compact('actividades'));
     }
 }
@@ -28,7 +28,7 @@ class ActividadesController extends Controller
     
     public function create()
     {
-        $tarea = tareas::all(); // Esto recupera todas las tareas disponibles
+        $tarea = tareas::all(); 
     
         return view('actividadescreate', compact('tarea'));
     }
@@ -49,7 +49,6 @@ class ActividadesController extends Controller
         return redirect()->route('actividades.index');
         
     } catch (\Illuminate\Database\QueryException $e) {
-        // Manejar la excepción de la base de datos (error de llave foránea)
         return redirect("/actividades/create")->with('error', 'La tarea no existe');
     }
     }
@@ -66,8 +65,8 @@ class ActividadesController extends Controller
     }
     public function PDF()
     {
-        $actividades = Actividades::all();
-        $pdf    = PDF::loadView('pdf.listadoactividades', compact('actividades'));
+        $tareas = tareas::all();
+        $pdf    = PDF::loadView('PDF.listadoactividades', compact('actividades'));
         return $pdf->stream('listadoactividades.pdf');
     }
 
