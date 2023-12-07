@@ -15,11 +15,6 @@
     <form method="POST" action="{{ route('actividades.store') }}">
         @csrf
 
-        <div class="form-group">
-            <label for="fecha_actividad">Fecha de Actividad:</label>
-            <input type="date" name="fecha_actividad" class="form-control" id="fecha_actividad">
-        </div>
-
         <div class="col-md-6">
             <label for="tarea_id" class="form-label">Tarea:</label>
             <select name="tarea_id" id="tarea_id" class="form-select" required>

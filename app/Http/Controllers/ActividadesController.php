@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
-use App\Models\Actividades;
+use App\Models\actividades;
 use Illuminate\Http\Request;
 use App\Models\tareas;
 use PDF;
@@ -15,12 +15,12 @@ class ActividadesController extends Controller
     $query = $request->input('query');
 
     if ($query) {
-        $results = Actividades::search($query)->get();
-        $actividades = Actividades::with('tareas')->get(); 
+        $results = actividades::search($query)->get();
+        $actividades = actividades::with('tareas')->get(); 
       
         return view('actividadesindex', compact('actividades', 'results'));
     } else {
-        $actividades = Actividades::with('tareas')->get();
+        $actividades = actividades::with('tareas')->get();
         return view('actividadesindex', compact('actividades'));
     }
 }
@@ -39,7 +39,6 @@ class ActividadesController extends Controller
         try{
         $actividad = new Actividades();
 
-        $actividad->fecha_actividad = $request->input('fecha_actividad');
         $actividad->descripcion_actividad = $request->input('descripcion_actividad');
         $actividad->tarea_id = $request->input('tarea_id');
 
@@ -114,7 +113,6 @@ class ActividadesController extends Controller
                     $actividad->delete();
                     return redirect("/actividades")->with('success', 'tarea eliminada con éxito');
                 } catch (\Illuminate\Database\QueryException $e) {
-                    // Manejar la excepción de la base de datos (error de llave foránea)
                     return redirect("/actividades")->with('error', 'No se puede eliminar la tarea. Está siendo utilizada en otra parte del sistema.');
                 }
             } else {
