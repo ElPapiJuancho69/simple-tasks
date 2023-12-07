@@ -52,7 +52,7 @@ class ReportesController extends Controller
     
     public function PDF()
     {
-        $reportes = reportes::all();
+        $reporte = reportes::all();
         $pdf    = PDF::loadView('PDF.listadoreportes', compact('reportes'));
         return $pdf->stream('listadoreportes.pdf');
     }
