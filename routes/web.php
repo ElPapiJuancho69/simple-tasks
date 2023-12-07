@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReportesController;
 use App\Http\Controllers\TareasController;
 use App\Http\Controllers\ApiSearchController;
+use App\Http\Controllers\ItemController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,3 +59,10 @@ Route::get('descargar-reportes', [ReportesController::class, 'pdf'])->name('list
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+//todo
+Route::get('/todo', [ItemController::class, 'index']);
+Route::post('/todo', [ItemController::class, 'store']);
+Route::put('/todo/{id}', [ItemController::class, 'update']);
+Route::delete('/todo/{id}', [ItemController::class, 'destroy']);
