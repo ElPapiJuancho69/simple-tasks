@@ -13,7 +13,7 @@ return new class extends Migration
         Schema::create('tareas', function (Blueprint $table) {
             $table->id(); // Equivalente a 'tarea_id serial PRIMARY KEY' en PostgreSQL
             $table->string('titulo');
-            $table->string('descripcion');
+            $table->string('descripcion')->nullable();
             $table->string('fecha_creacion');
             $table->string('estado');
             $table->unsignedBigInteger('usuario_id');
